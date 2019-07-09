@@ -1,0 +1,29 @@
+{% extends 'layout/default_beer.twig' %}
+
+{% block body %}
+<section id='login_section' class="row d-flex flex-column align-items-center justify-content-center">
+    {% if message %}
+        <div class="alert alert-info">{{ message }}</div>
+    {% endif %}
+    <article class="card p-3 col-12 col-sm-4">
+        <div class="card-title">
+            <h1 class="text-center">{{ page }}</h1>
+        </div>
+        <div class="card-body">
+            <form method="POST" action="">
+                <div class="form-group">
+                    <label for="mail">Adresse mail</label>
+                    <input class="form-control" type="email" placeholder="Votre courriel" name="mail">
+                </div>
+                <div class="form-group">
+                    <label for="password">Mot de passe</label>
+                    <input class="form-control" type="password" placeholder="Votre mot de passe" name="password">
+                </div>
+                <p class="text-center m-0">
+                    <button class="btn btn-primary" type="submit">Connexion</button>
+                </p>
+            </form>
+        </div>
+    </article>
+</section>
+{% endblock %}

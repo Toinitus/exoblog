@@ -1,0 +1,26 @@
+{% extends "layout/default_beer.twig" %}
+
+{% block body %}
+<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Nomination</th>
+				<th>Prix HT</th>
+				<th>Prix TTC</th>
+				<th>Quantité</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for key, beer in products %}
+				<tr>
+					<td>{{ beer.title }}</td>
+					<td id="PHT_{{ key }}">{{ beer.priceHT| number_format(2, '.', ',') }}€</td>
+					<td id="PTTC_{{ key }}">{{ (beer.priceHT * constant.TVA) | number_format(2, '.', ',') }}€</td>
+					<td><input class="form-control" type="number" min="0" name="qty[{{ beer.id }}]" value="0" oninput="calcPrice(this, {{ key }}, {{ beer.price }});" /></td>
+				</tr>
+                {% endfor %}
+				<button class="btn btn-primary" type="submit">COMMANDER</button>
+		</tbody>
+	</table>
+
+{% endblock body %}

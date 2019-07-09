@@ -1,0 +1,6 @@
+.env
+.vscode
+www/vendor
+www/composer.lock
+www/public/adminer.php
+www/tests/ExoTest/

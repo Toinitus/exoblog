@@ -1,0 +1,67 @@
+{% extends 'layout/default_beer.twig' %}
+
+{% block body %}
+<section id='profile_section' class="container mt-5">
+    <h1>{{ page }}</h1>
+    <article class="row">
+        <form method="POST" action="/user/updateUser" class="col-12 col-sm">
+            <h2>Mes informations personnelles</h1>
+            <div>
+                <label>Adresse mail</label>
+                <input class="form-control" disabled type="email" value="{{ session.user.mail }}" placeholder="Votre courriel">
+            </div>
+            <div>
+                <label>Nom</label>
+                <input class="form-control" type="text" name="lastname" value="{{ userInfos.lastname }}" placeholder="Votre nom">
+            </div>
+            <div>
+                <label>Prénom</label>
+                <input class="form-control" type="text" name="firstname" value="{{ userInfos.firstname }}" placeholder="Votre prénom">
+            </div>
+            <div>
+                <label>Adresse</label>
+                <input class="form-control" type="text" name="address" value="{{ userInfos.address }}" placeholder="Votre adresse">
+            </div>
+            <div>
+                <label>Code Postale</label>
+                <input class="form-control" type="text" name="zipCode" value="{{ userInfos.zipCode }}" placeholder="Votre code postal">
+            </div>
+            <div>
+                <label>Ville</label>
+                <input class="form-control" type="text" name="city" value="{{ userInfos.city}}" placeholder="Votre ville">
+            </div>
+            <div>
+                <label>Pays</label>
+                <input class="form-control" type="text" name="country" value="{{ userInfos.country}}" placeholder="Votre pays">
+            </div>
+            <div>
+                <label>Téléphone</label>
+                <input class="form-control" type="tel" name="phone" value="{{ userInfos.phone }}" placeholder="Votre numéro de téléphone">
+            </div>
+            <input class="form-control" type="hidden" name="id" value="{{ session.user.id }}" />   
+            <button type="submit" class="btn btn-primary mt-2 mb-5">Modifier</button>
+        </form>
+        <form method="POST" action="/user/changePassword" class="col-12 col-sm">
+            <h1>Changer mon mot de passe </h1>
+            {% if message %}
+                <div class="alert alert-info"><p>{{ message }}</p></div>
+            {% endif %}
+
+            <div>
+                <label>Mot de passe actuel</label>
+                <input class="form-control" type="password" name="old_password" placeholder="Mot de passe actuel">
+            </div>
+            <div>
+                <label>Nouveau mot de passe</label>
+                <input class="form-control" type="password" name="password" placeholder="Nouveau mot de passe">
+            </div>
+            <div>
+                <label>Répéter nouveau mot de passe</label>
+                <input class="form-control" type="password" name="veriftyPassword" placeholder="Répéter nouveau mot de passe">
+            </div>
+            <input class="form-control" type="hidden" name="id" value="{{ session.user.id }}" />   
+            <button type="submit" class="btn btn-primary mt-2 mb-5">Modifier</button>
+        </form>
+    </article>
+</section>
+{% endblock %}
