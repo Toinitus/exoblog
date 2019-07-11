@@ -14,19 +14,22 @@ class CartController extends Controller
         //dd($_SESSION['user']->getId());
         if ($_SESSION['user'])
         {
-            $products = $this->orders_line->theUserId($_SESSION['user']->getId());
+            $products = $this->orders_line->getPanier($_SESSION['user']->getId());
             //dd($products);
         }else
         {
             header('location: /login');
             exit;
         }
-
-        $priceTotalHT = 0;
-        foreach($products as $key => $value) {
-            $priceTotalHT += ($value->price * $value->getQty());
-        }
         
+        $priceTotalHT = 0;
+        $nbProduit = 0; 
+        foreach($products as $product) {
+            $priceTotalHT += ($product->beerQTY * $product->priceHT);
+            $nbProduit += $product->beerQTY;                                //pour afficher nombre article dans panier
+        }
+        $_SESSION['cartNumber'] = $nbProduit;
+        //dd($priceTotalHT);
         return $this->render('cart/index', [
             'products' => $products,
             'priceTotalHT' => $priceTotalHT

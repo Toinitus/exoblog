@@ -11,16 +11,21 @@
 			</tr>
 		</thead>
 		<tbody>
-			{% for key, beer in products %}
+			
+			{% for produit in products %}
 				<tr>
-					<td>{{ beer.title }}</td>
-					<td id="PHT_{{ key }}">{{ beer.priceHT| number_format(2, '.', ',') }}€</td>
-					<td id="PTTC_{{ key }}">{{ (beer.priceHT * constant.TVA) | number_format(2, '.', ',') }}€</td>
-					<td><input class="form-control" type="number" min="0" name="qty[{{ beer.id }}]" value="0" oninput="calcPrice(this, {{ key }}, {{ beer.price }});" /></td>
+					<td>{{ produit.title }}</td>
+					<td>{{ produit.priceHT * produit.beerQTY | number_format(2, '.', ',') }}€</td>
+					<td>{{ (produit.priceHT * produit.beerQTY * constant.TVA) | number_format(2, '.', ',') }}€</td>
+					<td>{{ produit.beerQTY }}</td>
 				</tr>
-                {% endfor %}
+			{% endfor %}
+			
 				<button class="btn btn-primary" type="submit">COMMANDER</button>
 		</tbody>
 	</table>
+
+	<p>Pris total HT : {{ priceTotalHT | number_format(2, '.', ',') }}€</p>
+	<p>Pris total TTC : {{ (priceTotalHT * constant.TVA) | number_format(2, '.', ',') }}€</p>
 
 {% endblock body %}

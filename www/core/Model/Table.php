@@ -2,6 +2,7 @@
 namespace Core\Model;
 
 use \Core\Controller\Database\DatabaseController;
+use PHPUnit\Framework\Constraint\IsFalse;
 
 class Table
 {
@@ -38,6 +39,10 @@ class Table
 
     public function all() {
         return $this->query("SELECT * FROM $this->table");
+    }
+
+    public function getQtyAndID($userID, $beerID){
+        return $this->query("SELECT id, beerQty, COUNT(*) as 'nb' FROM {$this->table} WHERE user_id = $userID AND beer_id = $beerID;");
     }
 
     public function create($fields, $class=false){
